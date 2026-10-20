@@ -1,0 +1,66 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AthenaQuery",
+      "Effect": "Allow",
+      "Action": [
+        "athena:StartQueryExecution",
+        "athena:GetQueryExecution",
+        "athena:GetQueryResults",
+        "athena:StopQueryExecution",
+        "athena:GetWorkGroup"
+      ],
+      "Resource": "arn:aws:athena:us-east-1:152774997921:workgroup/cootravale-s3-athena"
+    },
+    {
+      "Sid": "GlueReadCatalog",
+      "Effect": "Allow",
+      "Action": [
+        "glue:GetDatabase",
+        "glue:GetDatabases",
+        "glue:GetTable",
+        "glue:GetTables",
+        "glue:GetPartition",
+        "glue:GetPartitions",
+        "glue:BatchGetPartition"
+      ],
+      "Resource": [
+        "arn:aws:glue:us-east-1:152774997921:catalog",
+        "arn:aws:glue:us-east-1:152774997921:database/silver_kmn",
+        "arn:aws:glue:us-east-1:152774997921:table/silver_kmn/veiculo_veiculo",
+        "arn:aws:glue:us-east-1:152774997921:table/silver_kmn/agreg_termo_veiculo",
+        "arn:aws:glue:us-east-1:152774997921:table/silver_kmn/agreg_termo"
+      ]
+    },
+    {
+      "Sid": "S3ReadSilverData",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:ListBucket",
+        "s3:GetBucketLocation"
+      ],
+      "Resource": [
+        "arn:aws:s3:::cootravale-layer-silver",
+        "arn:aws:s3:::cootravale-layer-silver/source_kmm/*"
+      ]
+    },
+    {
+      "Sid": "S3AthenaResults",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:ListBucket",
+        "s3:GetBucketLocation",
+        "s3:AbortMultipartUpload",
+        "s3:ListMultipartUploadParts"
+      ],
+      "Resource": [
+        "arn:aws:s3:::cootravale-athena-rcm",
+        "arn:aws:s3:::cootravale-athena-rcm/*"
+      ]
+    }
+  ]
+}
